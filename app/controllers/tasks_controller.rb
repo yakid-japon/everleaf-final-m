@@ -3,15 +3,21 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    # Task.paginate(:page => params[:page], :per_page => 3)
+    @tasks = current_user.tasks.order("created_at desc").page(params[:page]).includes(:user)
+    @tasks = current_user.tasks.order_by_deadline.page(params[:page]) if params[:sort_expired]
+    @tasks = current_user.tasks.order_by_priority.page(params[:page]) if params[:sort_priority]
+    if params[:task].present? && params[:task][:tag] == ''
+      @tasks = search_by_name_or_status(params[:task][:status], params[:task][:name]).page(params[:page])
+    elsif params[:task].present? && params[:task][:tag] != ''
+      @tasks = Tag.find_by(id: params[:task][:tag].to_i).tasks
+    end
   end
 
   # GET /tasks/1 or /tasks/1.json
   def show
   end
 
-
-  
   # GET /tasks/new
   def new
     @task = Task.new
@@ -23,7 +29,7 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     respond_to do |format|
       if @task.save
@@ -66,6 +72,14 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :content)
+      params.require(:task).permit(:name, :content, :deadline, :status, :priority, tag_ids: [])
+    end
+
+    def search_by_name_or_status(status, name)
+      if status && name == '' 
+        @tasks = current_user.tasks.search_by_status(status)
+      elsif name && status == ''
+        @tasks = current_user.tasks.search_by_name(name.strip)
+      end
     end
 end

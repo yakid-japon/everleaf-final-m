@@ -5,3 +5,40 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+User.create!(
+    name: "admin",
+    email: "admin@admin.com",
+    password: "123456",
+    is_admin: true
+)
+8.times do |n|
+    User.create!(
+        name: "tomo#{n}",
+        email: "tomo#{n}@gmail.com",
+        password: "123456",
+        is_admin: false
+    )
+end
+user = User.create!(
+    name: "jeanne",
+    email: "jeanne@gmail.com",
+    password: "123456",
+    is_admin: false
+)
+10.times do |n|
+    task = Task.create!(
+        name: "task #{n}",
+        content: "do a thing #{n}",
+        deadline: "2021-10-12",
+        priority: n%3,
+        status: "unstarted",
+        user_id: user.id
+    )
+    tag = Tag.create!(
+        name: "tag #{n}"
+    )
+    TaskTag.create!(
+        task_id: task.id,
+        tag_id: tag.id
+    )
+end
