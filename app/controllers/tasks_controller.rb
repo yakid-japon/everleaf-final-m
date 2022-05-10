@@ -64,6 +64,16 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:name, :content)
+      params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+    end
+
+    def search_by_name_or_status(status, name)
+      if status && name == ''
+        @tasks = Task.search_by_status(status)
+      elsif name && status == ''
+        @tasks = Task.search_by_name(name.strip)
+      else name && status
+        @tasks = Task.search_by_name_and_status(name.strip, status)
+      end
     end
 end

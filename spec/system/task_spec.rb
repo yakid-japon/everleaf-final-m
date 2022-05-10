@@ -15,6 +15,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         expect(page).to have_content 'test_content'
       end
     end
+
   end
   describe "Fonction d'affichage de liste" do
     context "Lors de la transition vers l'écran de liste" do
@@ -26,6 +27,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         visit tasks_path
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'test_name_second'
+
       end
     end
   end
@@ -35,4 +37,5 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
        end
      end
   end
+
 end
