@@ -11,34 +11,27 @@ User.create!(
     password: "123456",
     is_admin: true
 )
-8.times do |n|
-    User.create!(
-        name: "tomo#{n}",
-        email: "tomo#{n}@gmail.com",
-        password: "123456",
-        is_admin: false
-    )
-end
+
 user = User.create!(
-    name: "jeanne",
-    email: "jeanne@gmail.com",
+    name: "tomo",
+    email: "tomo@gmail.com",
     password: "123456",
     is_admin: false
 )
-10.times do |n|
-    task = Task.create!(
-        name: "task #{n}",
-        content: "do a thing #{n}",
-        deadline: "2021-10-12",
-        priority: n%3,
-        status: "unstarted",
-        user_id: user.id
-    )
-    tag = Tag.create!(
-        name: "tag #{n}"
-    )
-    TaskTag.create!(
-        task_id: task.id,
-        tag_id: tag.id
-    )
-end
+Task.create!(
+    name: "task",
+    content: "do a thing",
+    deadline: "2021-10-12",
+    priority: 2,
+    status: "unstarted",
+    user_id: user.id
+)
+Task.create!(
+    name: "new task",
+    content: "do a new thing",
+    deadline: "2021-10-15",
+    priority: 1,
+    status: "in progress",
+    user_id: user.id
+)
+
