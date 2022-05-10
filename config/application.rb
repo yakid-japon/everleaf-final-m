@@ -13,6 +13,9 @@ module EveryleafProject
     config.time_zone = 'London'
     config.active_record.default_timezone = :local
 
+    config.assets.paths << "#{Rails.root.to_s}/app/assets/fonts"
+
+
     config.generators do |g|
       g.test_framework :rspec,
                        model_specs: true,

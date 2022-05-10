@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tags</h1>
+
+<table class="table table-bordered">
+  <tbody>
+    <% @tags.each do |tag| %>
+        <span class="badge bg-dark me-2"><%= tag.name %></span>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tag', new_tag_path, class:"btn btn-success" %>

@@ -25,5 +25,12 @@
   <%= @task.priority %>
 </p>
 
+<p>
+  <strong>Tags:</strong>
+  <% @task.tags.each do |tag| %>
+  <span class="badge bg-dark me-2"><%= tag.name %></span>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
