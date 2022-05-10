@@ -72,6 +72,7 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
+
       params.require(:task).permit(:name, :content, :deadline, :status, :priority, tag_ids: [])
     end
 
@@ -80,6 +81,7 @@ class TasksController < ApplicationController
         @tasks = current_user.tasks.search_by_status(status)
       elsif name && status == ''
         @tasks = current_user.tasks.search_by_name(name.strip)
+
       end
     end
 end
