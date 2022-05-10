@@ -19,11 +19,13 @@
   <div class="field">
     <%= form.label :content, class:"form-label" %>
     <%= form.text_field :content, class:"form-control" %>
+
   </div>
 
   <div class="field">
     <%= form.label :deadline, class:"form-label" %>
     <%= form.date_field :deadline, class:"form-control" %>
+
   </div>
 
   <div class="field">
@@ -34,7 +36,20 @@
   <div class="field">
     <%= form.label :priority, class:"form-label" %>
     <%= form.select :priority, Task.priorities.keys.map{ |key|[key.titleize, key] }, {}, class: "form-select" %>
+
   </div>
+
+  <div class="field">
+    <%= form.label :priority, class:"form-label" %>
+    <%= form.select :priority, Task.priorities.keys.map{ |key|[key.titleize, key] }, {}, class: "form-select" %>
+  </div>
+
+  <% Tag.all.each do |tag| %>
+  <div class="field form-check-inline">
+    <%= form.check_box :tag_ids, { multiple: true, checked: task.tags.find_by(id: tag.id).present?, disabled: tag[:disabled], include_hidden: false }, tag[:id], class:"form-check-input" %>
+    <%= form.label :tag_ids, tag.name, value: tag[:id], class:"form-check-label" %>
+  </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit class:"btn btn-primary" %>

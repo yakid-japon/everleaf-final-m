@@ -24,6 +24,7 @@ RSpec.describe Task, type: :model do
       end
     end
   end
+
   # -----------------------------------------------------------------------------
   describe 'Fonction de recherche' do
     # Vous pouvez modifier le contenu des données de test selon vos besoins.
@@ -52,4 +53,5 @@ RSpec.describe Task, type: :model do
       end
     end
   end
+
 end

@@ -4,6 +4,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
     # Vous pouvez modifier le contenu des données de test selon vos besoins.
     FactoryBot.create(:task, name: "task")
     FactoryBot.create(:second_task, name: "sample")
+
   end
  
   describe "Nouvelle fonction de création" do
@@ -15,6 +16,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         expect(page).to have_content 'test_content'
       end
     end
+
     context "Lors de la création d'une nouvelle tâche" do
       it "La tâche est créée avec une deadline" do
         task = FactoryBot.create(:task, name: 'task')
@@ -22,6 +24,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         expect(page).to have_content '2021-10-07'
       end
     end
+
   end
   describe "Fonction d'affichage de liste" do
     context "Lors de la transition vers l'écran de liste" do
@@ -49,6 +52,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
         click_on 'Order by priority'
         task_list = all('.priority_row')
         expect(task_list[0]).to have_content 'high'
+
       end
     end
   end
@@ -58,6 +62,7 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
        end
      end
   end
+
   # Test de recherche-------------------------------------------------------
   describe "Fonction de recherche" do
     context "Si vous effectuez une recherche floue par Title" do
@@ -86,4 +91,5 @@ RSpec.describe 'Fonction de gestion des tâches', type: :system do
       end
     end
   end
+
 end

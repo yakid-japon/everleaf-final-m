@@ -11,6 +11,7 @@ User.create!(
     password: "123456",
     is_admin: true
 )
+
 user = User.create!(
     name: "tomo",
     email: "tomo@gmail.com",
@@ -33,3 +34,4 @@ Task.create!(
     status: "in progress",
     user_id: user.id
 )
+
