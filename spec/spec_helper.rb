@@ -44,13 +44,14 @@ RSpec.configure do |config|
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  # config.before(:each) do |example|
-  #   if example.metadata[:type] == :system
-  #     driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]  do |options|
-  #       options.add_argument('no-sandbox')
-  #     end
-  #   end
-  # end
+
+  config.before(:each) do |example|
+    if example.metadata[:type] == :system
+      driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]  do |options|
+        options.add_argument('no-sandbox')
+      end
+    end
+  end
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
